@@ -1,0 +1,39 @@
+#ilovecookies {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    z-index:40000;
+}
+#ilovecookies .inner {
+    margin:0 auto;
+    width:95%;
+    max-width:1280px;
+    padding: 10px 0;
+}
+#ilovecookies .inner .text {
+    font-size:20px;
+}
+#ilovecookies .inner .buttons {
+    margin-top:20px;
+}
+#ilovecookies .inner .buttons:after {
+    clear:both;
+    display:table;
+    content:'';
+}
+#ilovecookies .inner .buttons a {
+    color:inherit;
+    text-decoration:none;
+    font-weight:bold;
+}
+#ilovecookies .inner .buttons .more {
+    font-size:20px;
+    float:left;
+}
+#ilovecookies .inner .buttons .close {
+    font-size:20px;
+    float:right;
+}
