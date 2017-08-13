@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function()
     {
         document.querySelector('.ilovecookies__inner').insertAdjacentHTML('beforeend','<div class="ilovecookies__buttons"></div>');
     }
-    if( settings.more_link ) {
+    if( settings.more_link )
+    {
         // if relative link is used
         if( settings.more_link.indexOf('http') === -1 )
         {
@@ -35,13 +36,15 @@ document.addEventListener('DOMContentLoaded', function()
         }
         document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend','<a href="'+settings.more_link+'" class="ilovecookies__more">'+settings.more_text+'</a>');
     }
-    if( settings.close_show ) {
+    if( settings.close_show )
+    {
         document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend','<a href="#" class="ilovecookies__close">'+settings.close_text+'</a>');
     }
     document.querySelector('.ilovecookies__close').addEventListener('click', function(e)
     {
         document.querySelector('.ilovecookies').classList.add('ilovecookies--fadeout');
-        setTimeout(function() {
+        setTimeout(function()
+        {
             var el = document.querySelector('.ilovecookies');
             el.parentNode.removeChild(el);
         },1000);
