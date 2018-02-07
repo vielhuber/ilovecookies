@@ -2,14 +2,24 @@ document.addEventListener('DOMContentLoaded', function()
 {
 
     var settings = {
-        text: 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies.\
-        Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.',
         expiration: 30,
-        close_show: true,
-        close_text: 'Schließen',
-        more_text: 'Weitere Informationen',
-        more_link: 'datenschutz'
+        close_show: true
     }
+    if( document.documentElement.hasAttribute('lang') && document.documentElement.getAttribute('lang').substring(0,2) == 'en' )
+    {
+        settings.text = 'To ensure that our web site is well managed and to facilitate improved navigation within the site, we may use cookies. By using this website, you agree to the use of cookies.';
+        settings.close_text = 'Close';
+        settings.more_text = 'Further information';
+        settings.more_link = 'privacy';
+    }
+    else
+    {
+        settings.text = 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.';
+        settings.close_text = 'Schließen';
+        settings.more_text = 'Weitere Informationen';
+        settings.more_link = 'datenschutz';
+    }
+
     if( document.cookie !== undefined && document.cookie.indexOf('ilovecookies=true') > -1 )
     {
         return true;
