@@ -97,7 +97,7 @@ var iLoveCookies = function(settings)
                 right: 0;\
                 background-color: rgba(0, 0, 0, 0.90);\
                 color: #fff;\
-                z-index:40000;\
+                z-index:2147483647;\
                 transition: transform 0.5s ease-in;\
                 font-size:17px;\
             }\
