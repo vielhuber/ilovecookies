@@ -1,9 +1,7 @@
-var iLoveCookies = function()
+var iLoveCookies = function(settings)
 {
 
-    this.settings = null;
-
-    this.init = function(settings)
+    this.init = function()
     {
         var _this = this;
         _this.settings = settings;
@@ -153,26 +151,9 @@ var iLoveCookies = function()
         </style>\
         ');
     }
+    
+    this.settings = settings;
+    this.init();
 
 }
 
-document.addEventListener('DOMContentLoaded', function()
-{
-    var ilovecookies = new iLoveCookies();
-    ilovecookies.init({
-        expiration: 30,
-        css: true,
-        de: {
-            text: 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.',
-            close_text: 'Schließen',
-            more_text: 'Weitere Informationen',
-            more_link: 'datenschutz'
-        },
-        en: {
-            text: 'To ensure that our web site is well managed and to facilitate improved navigation within the site, we may use cookies. By using this website, you agree to the use of cookies.',
-            close_text: 'Close',
-            more_text: 'Further information',
-            more_link: function() { alert('foo'); }
-        }
-    });
-});
