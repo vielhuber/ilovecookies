@@ -1,67 +1,178 @@
-document.addEventListener('DOMContentLoaded', function()
+var iLoveCookies = function()
 {
 
-    var settings = {
-        expiration: 30,
-        close_show: true
-    }
-    if( document.documentElement.hasAttribute('lang') && document.documentElement.getAttribute('lang').substring(0,2) == 'en' )
-    {
-        settings.text = 'To ensure that our web site is well managed and to facilitate improved navigation within the site, we may use cookies. By using this website, you agree to the use of cookies.';
-        settings.close_text = 'Close';
-        settings.more_text = 'Further information';
-        settings.more_link = 'privacy';
-    }
-    else
-    {
-        settings.text = 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.';
-        settings.close_text = 'Schließen';
-        settings.more_text = 'Weitere Informationen';
-        settings.more_link = 'datenschutz';
-    }
+    this.settings = null;
 
-    if( document.cookie !== undefined && document.cookie.indexOf('ilovecookies=true') > -1 )
+    this.init = function(settings)
     {
-        return true;
-    }
-    document.body.insertAdjacentHTML('afterbegin','\
-        <div class="ilovecookies">\
-            <div class="ilovecookies__inner">\
-                <div class="ilovecookies__text">\
-                    '+settings.text+'\
+        var _this = this;
+        _this.settings = settings;
+
+        if( document.cookie !== undefined && document.cookie.indexOf('ilovecookies=true') > -1 )
+        {
+            return true;
+        }
+
+        if( _this.settings.css === true )
+        {
+            _this.addCss();
+        }
+
+        let lang = 'de';
+        if(
+            document.documentElement.hasAttribute('lang') &&
+            (document.documentElement.getAttribute('lang').substring(0,2).toLowerCase() in _this.settings)
+        )
+        {
+            lang = document.documentElement.getAttribute('lang').substring(0,2).toLowerCase();
+        }
+
+        document.body.insertAdjacentHTML('afterbegin','\
+            <div class="ilovecookies">\
+                <div class="ilovecookies__inner">\
+                    <div class="ilovecookies__text">\
+                        '+_this.settings[lang].text+'\
+                    </div>\
                 </div>\
             </div>\
-        </div>\
-    ');
-    if( settings.more_link || settings.close_show )
-    {
-        document.querySelector('.ilovecookies__inner').insertAdjacentHTML('beforeend','<div class="ilovecookies__buttons"></div>');
-    }
-    if( settings.more_link )
-    {
-        // if relative link is used
-        if( settings.more_link.indexOf('http') === -1 )
-        {
-            settings.more_link = window.location.protocol+'//'+window.location.host+'/'+settings.more_link;
-        }
-        document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend','<a href="'+settings.more_link+'" class="ilovecookies__more">'+settings.more_text+'</a>');
-    }
-    if( settings.close_show )
-    {
-        document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend','<a href="#" class="ilovecookies__close">'+settings.close_text+'</a>');
-    }
-    document.querySelector('.ilovecookies__close').addEventListener('click', function(e)
-    {
-        document.querySelector('.ilovecookies').classList.add('ilovecookies--fadeout');
-        setTimeout(function()
-        {
-            var el = document.querySelector('.ilovecookies');
-            el.parentNode.removeChild(el);
-        },1000);
-        var d = new Date(); d.setTime(d.getTime() + (settings.expiration*24*60*60*1000));
-        var expires = d.toUTCString();
-        document.cookie = 'ilovecookies' + "=" + 'true' + "; " + "expires=" + expires + "; path=/";
-        e.preventDefault();
-    }, false);
+        ');
 
+        if( ('more_text' in _this.settings[lang]) || ('close_text' in _this.settings[lang]) )
+        {
+            document.querySelector('.ilovecookies__inner').insertAdjacentHTML('beforeend','<div class="ilovecookies__buttons"></div>');
+        }
+
+        if( 'more_text' in _this.settings[lang] )
+        {
+            var more_link_render = _this.settings[lang].more_link;
+            // if function is used
+            if (typeof _this.settings[lang].more_link === 'function')
+            {
+                more_link_render = '#';
+            }
+            // if relative link is used
+            else if( _this.settings[lang].more_link.indexOf('http') === -1 )
+            {
+                more_link_render = window.location.protocol+'//'+window.location.host+'/'+_this.settings[lang].more_link;
+            }
+            document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend','<a href="'+more_link_render+'" class="ilovecookies__more">'+_this.settings[lang].more_text+'</a>');
+            if(typeof _this.settings[lang].more_link === 'function')
+            {
+                document.querySelector('.ilovecookies__more').addEventListener('click', function(e)
+                {
+                    _this.settings[lang].more_link();
+                    e.preventDefault();
+                }, false);
+            }
+        }
+
+        if( 'close_text' in _this.settings[lang] )
+        {
+            document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend','<a href="#" class="ilovecookies__close">'+_this.settings[lang].close_text+'</a>');
+        }
+
+        document.querySelector('.ilovecookies__close').addEventListener('click', function(e)
+        {
+            document.querySelector('.ilovecookies').classList.add('ilovecookies--fadeout');
+            setTimeout(function()
+            {
+                var el = document.querySelector('.ilovecookies');
+                el.parentNode.removeChild(el);
+            },1000);
+            var d = new Date(); d.setTime(d.getTime() + (_this.settings.expiration*24*60*60*1000));
+            var expires = d.toUTCString();
+            document.cookie = 'ilovecookies' + "=" + 'true' + "; " + "expires=" + expires + "; path=/";
+            e.preventDefault();
+        }, false);
+
+    }
+
+    this.addCss = function()
+    {
+        document.head.insertAdjacentHTML('beforeend','\
+        <style>\
+            .ilovecookies\
+            {\
+                position: fixed;\
+                bottom: 0;\
+                left: 0;\
+                right: 0;\
+                background-color: rgba(0, 0, 0, 0.90);\
+                color: #fff;\
+                z-index:40000;\
+                transition: transform 0.5s ease-in;\
+                font-size:17px;\
+            }\
+            .ilovecookies--fadeout\
+            {\
+                transform: translateY(100%);\
+                pointer-events:none;\
+            }\
+            .ilovecookies__inner\
+            {\
+                margin:0 auto;\
+                width:95%;\
+                max-width:1280px;\
+                padding: 10px 0;\
+            }\
+            .ilovecookies__buttons\
+            {\
+                margin-top:15px;\
+            }\
+            .ilovecookies__buttons:after\
+            {\
+                clear:both;\
+                display:table;\
+                content:\'\';\
+            }\
+            .ilovecookies__buttons a\
+            {\
+                color:inherit;\
+                text-decoration:none;\
+                font-weight:bold;\
+            }\
+            .ilovecookies__more\
+            {\
+                float:left;\
+            }\
+            .ilovecookies__close\
+            {\
+                float:right;\
+            }\
+            @media screen and (max-width: 700px)\
+            {\
+                .ilovecookies\
+                {\
+                    font-size:14px;\
+                }\
+                .ilovecookies__buttons\
+                {\
+                    margin-top:10px;\
+                }\
+            }\
+        </style>\
+        ');
+    }
+
+}
+
+document.addEventListener('DOMContentLoaded', function()
+{
+    var ilovecookies = new iLoveCookies();
+    ilovecookies.init({
+        expiration: 30,
+        css: true,
+        de: {
+            text: 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.',
+            close_text: 'Schließen',
+            more_text: 'Weitere Informationen',
+            more_link: 'datenschutz'
+        },
+        en: {
+            text: 'To ensure that our web site is well managed and to facilitate improved navigation within the site, we may use cookies. By using this website, you agree to the use of cookies.',
+            close_text: 'Close',
+            more_text: 'Further information',
+            more_link: function() { alert('foo'); }
+        }
+    });
 });
