@@ -157,3 +157,4 @@ var iLoveCookies = function(settings)
 
 }
 
+var ilovecookies = new iLoveCookies();
