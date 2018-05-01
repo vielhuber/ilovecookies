@@ -156,5 +156,3 @@ var iLoveCookies = function(settings)
     this.init();
 
 }
-
-var ilovecookies = new iLoveCookies();
