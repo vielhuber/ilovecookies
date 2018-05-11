@@ -100,6 +100,9 @@ var iLoveCookies = function () {
                 z-index:2147483647;\
                 transition: transform 0.5s ease-in;\
                 font-size:17px;\
+                -webkit-transform: translateZ(0);\
+                -moz-transform: translateZ(0);\
+                transform: translateZ(0);\
             }\
             .ilovecookies--fadeout\
             {\
