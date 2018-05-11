@@ -1,0 +1,9 @@
+{
+  "name": "ilovecookies",
+  "version": "1.0.0",
+  "main": "ilovecookies.js",
+  "files": ["ilovecookies.js"],
+  "repository": "git@github.com:vielhuber/ilovecookies.git",
+  "author": "David Vielhuber <david@vielhuber.de>",
+  "license": "MIT"
+}
