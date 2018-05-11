@@ -17,7 +17,7 @@ or embed it directly:
 ## usage
 
 ```js
-document.addEventListener('DOMContentLoaded', function()
+document.addEventListener('DOMContentLoaded', () =>
 {
     let ilovecookies = new iLoveCookies({
         expiration: 30,
