@@ -16,7 +16,7 @@ var iLoveCookies = function(settings)
             _this.addCss();
         }
 
-        let lang = 'de';
+        var lang = 'de';
         if(
             document.documentElement.hasAttribute('lang') &&
             (document.documentElement.getAttribute('lang').substring(0,2).toLowerCase() in _this.settings)
