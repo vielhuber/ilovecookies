@@ -11,7 +11,7 @@ now embed it directly:
 
 or use it as a module:
 ```js
-import ilovecookies from 'ilovecookies';
+import iLoveCookies from 'iLoveCookies';
 ```
 
 
@@ -20,7 +20,7 @@ import ilovecookies from 'ilovecookies';
 ```js
 document.addEventListener('DOMContentLoaded', function()
 {
-    var ilovecookies = new iLoveCookies({
+    let ilovecookies = new iLoveCookies({
         expiration: 30,
         css: true,
         de: {
