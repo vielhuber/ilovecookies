@@ -155,8 +155,4 @@ var iLoveCookies = function () {
     return iLoveCookies;
 }();
 
-/* expose class to window for direct usage */
-
-
 exports.default = iLoveCookies;
-window.iLoveCookies = iLoveCookies;

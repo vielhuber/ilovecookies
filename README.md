@@ -1,17 +1,16 @@
 ## installation
 
+use it as a module:
 ```
 npm install ilovecookies
 ```
-
-now embed it directly:
-```html
-<script src="ilovecookies.js"></script> 
-```
-
-or use it as a module:
 ```js
 import iLoveCookies from 'iLoveCookies';
+```
+
+or embed it directly:
+```html
+<script src="ilovecookies.min.js"></script> 
 ```
 
 
