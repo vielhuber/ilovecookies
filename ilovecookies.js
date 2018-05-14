@@ -58,7 +58,7 @@ var iLoveCookies = function () {
             else if (_this.settings[lang].more_link.indexOf('http') === -1) {
                     more_link_render = window.location.protocol + '//' + window.location.host + '/' + _this.settings[lang].more_link;
                 }
-            document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend', '<a href="' + more_link_render + '" class="ilovecookies__more">' + _this.settings[lang].more_text + '</a>');
+            document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend', '<a href="' + more_link_render + '"' + (more_link_render != '#' && more_link_render.indexOf(window.location.host) === -1 ? ' target="_blank"' : '') + ' class="ilovecookies__more">' + _this.settings[lang].more_text + '</a>');
             if (typeof _this.settings[lang].more_link === 'function') {
                 document.querySelector('.ilovecookies__more').addEventListener('click', function (e) {
                     _this.settings[lang].more_link();
