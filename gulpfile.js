@@ -33,6 +33,7 @@ gulp.task('js', function()
         .on('error', function(err) { console.log(err.toString()); this.emit('end'); })
         .pipe(source('ilovecookies.min.js'))
         .pipe(buffer())
+        .pipe(uglify()).on('error', function(e){ console.log(e); })
         .pipe(gulp.dest('.'))
         .pipe(browserSync.reload({stream: true}));
 });
