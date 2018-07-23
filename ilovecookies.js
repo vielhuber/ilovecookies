@@ -80,8 +80,15 @@ var iLoveCookies = function () {
             var d = new Date();d.setTime(d.getTime() + _this.settings.expiration * 24 * 60 * 60 * 1000);
             var expires = d.toUTCString();
             document.cookie = 'ilovecookies' + "=" + 'true' + "; " + "expires=" + expires + "; path=/";
+            if (_this.settings.padding_bottom === true) {
+                _this.paddingBottomReset();
+            }
             e.preventDefault();
         }, false);
+
+        if (_this.settings.padding_bottom === true) {
+            _this.paddingBottom();
+        }
     }
 
     (0, _createClass3.default)(iLoveCookies, [{
@@ -153,6 +160,32 @@ var iLoveCookies = function () {
             }\
         </style>\
         ');
+        }
+    }, {
+        key: 'paddingBottom',
+        value: function paddingBottom() {
+            var _this2 = this;
+
+            document.body.setAttribute('data-padding-bottom-original', window.getComputedStyle(document.body).getPropertyValue('padding-bottom'));
+            window.addEventListener('load', function () {
+                _this2.paddingBottomResize();
+            });
+            window.addEventListener('resize', function () {
+                _this2.paddingBottomResize();
+            });
+            this.paddingBottomResize();
+        }
+    }, {
+        key: 'paddingBottomResize',
+        value: function paddingBottomResize() {
+            var height = parseInt(document.querySelector('.ilovecookies').offsetHeight) + parseInt(document.body.getAttribute('data-padding-bottom-original'));
+            document.body.style.paddingBottom = height + 'px';
+        }
+    }, {
+        key: 'paddingBottomReset',
+        value: function paddingBottomReset() {
+            var height = parseInt(document.body.getAttribute('data-padding-bottom-original'));
+            document.body.style.paddingBottom = height + 'px';
         }
     }]);
     return iLoveCookies;

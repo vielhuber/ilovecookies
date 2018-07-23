@@ -80,8 +80,17 @@ export default class iLoveCookies
             var d = new Date(); d.setTime(d.getTime() + (_this.settings.expiration*24*60*60*1000));
             var expires = d.toUTCString();
             document.cookie = 'ilovecookies' + "=" + 'true' + "; " + "expires=" + expires + "; path=/";
+            if( _this.settings.padding_bottom === true )
+            {
+                _this.paddingBottomReset();
+            }
             e.preventDefault();
         }, false);
+
+        if( _this.settings.padding_bottom === true )
+        {
+            _this.paddingBottom();
+        }
 
     }
 
@@ -153,6 +162,32 @@ export default class iLoveCookies
             }\
         </style>\
         ');
+    }
+
+    paddingBottom()
+    {
+        document.body.setAttribute('data-padding-bottom-original',window.getComputedStyle(document.body).getPropertyValue('padding-bottom'));
+        window.addEventListener('load', () =>
+        {
+            this.paddingBottomResize();
+        });
+        window.addEventListener('resize', () =>
+        {
+            this.paddingBottomResize();
+        });
+        this.paddingBottomResize();
+    }
+
+    paddingBottomResize()
+    {
+        let height = parseInt(document.querySelector('.ilovecookies').offsetHeight) + parseInt(document.body.getAttribute('data-padding-bottom-original'));
+        document.body.style.paddingBottom = height+'px';
+    }
+
+    paddingBottomReset()
+    {
+        let height = parseInt(document.body.getAttribute('data-padding-bottom-original'));
+        document.body.style.paddingBottom = height+'px';
     }
     
 }

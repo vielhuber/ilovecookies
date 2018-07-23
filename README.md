@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () =>
     let ilovecookies = new iLoveCookies({
         expiration: 30,
         css: true,
+        padding_bottom: true, // increase padding bottom with height of cookiebar to prevent overlapping important links
         de: {
             text: 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.',
             close_text: 'Schließen',

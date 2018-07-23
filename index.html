@@ -10,6 +10,7 @@
         var ilovecookies = new iLoveCookies({
             expiration: 30,
             css: true,
+            padding_bottom: true,
             de: {
                 text: 'Um die Webseite optimal gestalten und fortlaufend verbessern zu können, verwenden wir Cookies. Durch die weitere Nutzung der Webseite stimmen Sie der Verwendung von Cookies zu.',
                 close_text: 'Schließen',
@@ -25,7 +26,29 @@
         });
     });
     </script>
+    <style>
+        *
+        {
+            margin:0;
+            padding:0;
+        }
+        .main
+        {
+            background-color:blue;
+            height:2500px;
+            height:150vh;
+        }
+        .footer
+        {
+            background-color:red;
+            height:30px;
+        }
+    </style>
 </head>
 <body>
+
+    <div class="main"></div>
+    <div class="footer"></div>
+
 </body>
 </html>
