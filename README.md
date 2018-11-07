@@ -5,7 +5,7 @@ use it as a module:
 npm install ilovecookies
 ```
 ```js
-import iLoveCookies from 'iLoveCookies';
+import iLoveCookies from 'ilovecookies';
 ```
 
 or embed it directly:
