@@ -44,11 +44,11 @@ var iLoveCookies = function () {
             </div>\
         ');
 
-        if ('more_text' in _this.settings[lang] || 'close_text' in _this.settings[lang]) {
+        if ('more_text' in _this.settings[lang] && _this.settings[lang].more_text !== null && _this.settings[lang].more_text !== '' || 'close_text' in _this.settings[lang] && _this.settings[lang].close_text !== null && _this.settings[lang].close_text !== '') {
             document.querySelector('.ilovecookies__inner').insertAdjacentHTML('beforeend', '<div class="ilovecookies__buttons"></div>');
         }
 
-        if ('more_text' in _this.settings[lang]) {
+        if ('more_text' in _this.settings[lang] && _this.settings[lang].more_text !== null && _this.settings[lang].more_text !== '') {
             var more_link_render = _this.settings[lang].more_link;
             // if function is used
             if (typeof _this.settings[lang].more_link === 'function') {
@@ -67,7 +67,7 @@ var iLoveCookies = function () {
             }
         }
 
-        if ('close_text' in _this.settings[lang]) {
+        if ('close_text' in _this.settings[lang] && _this.settings[lang].close_text !== null && _this.settings[lang].close_text !== '') {
             document.querySelector('.ilovecookies__buttons').insertAdjacentHTML('beforeend', '<a href="#" class="ilovecookies__close">' + _this.settings[lang].close_text + '</a>');
         }
 
