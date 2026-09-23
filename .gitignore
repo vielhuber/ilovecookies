@@ -4,3 +4,5 @@
 /_js/_build/
 /_tests/_build/
 /package-lock.json
+*.js.map
+*.mjs.map

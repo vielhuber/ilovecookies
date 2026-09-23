@@ -184,7 +184,11 @@ export default class iLoveCookies
 
     paddingBottomResize()
     {
-        let height = parseInt(document.querySelector('.ilovecookies').offsetHeight) + parseInt(document.body.getAttribute('data-padding-bottom-original'));
+        let $cookiebar = document.querySelector('.ilovecookies');
+        if ($cookiebar === null) {
+            return;
+        }
+        let height = parseInt($cookiebar.offsetHeight) + parseInt(document.body.getAttribute('data-padding-bottom-original'));
         document.body.style.paddingBottom = height+'px';
     }
 
@@ -197,4 +201,6 @@ export default class iLoveCookies
 }
 
 /* expose class to window for direct usage */
-window.iLoveCookies = iLoveCookies;
+if (typeof window !== 'undefined') {
+    window.iLoveCookies = iLoveCookies;
+}
